@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,13 +7,19 @@
 </head>
 <body>
  <div class="p-3">
+     <div class="p-1">
+         <a class="btn btn-info" href="/addPage">
+             add Product
+         </a>
+     </div>
    <table class="table">
        <thead>
        <tr>
            <th>ID</th>
            <th>Name</th>
-           <th>price</th>
-           <th>quantity</th>
+           <th>Price</th>
+           <th>Quantity</th>
+           <th>Actions</th>
        </tr>
        </thead>
        <tbody>
@@ -22,6 +28,7 @@
            <td th:text="${p.name}"></td>
            <td th:text="${p.price}"></td>
            <td th:text="${p.quantity}"></td>
+           <td><a class="btn btn-danger" th:href="@{/delete(id=${p.id})}">Delete</a></td>
        </tr>
        </tbody>
    </table>

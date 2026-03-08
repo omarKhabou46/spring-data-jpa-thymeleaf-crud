@@ -7,8 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ProductController {
@@ -19,6 +18,23 @@ public class ProductController {
         Page<Product> productPage = productService.getAllProducts(page, size);
         model.addAttribute("productPage", productPage);
         return "index";
+    }
+
+    @GetMapping("/delete")
+    public String deleteProduct(long id) {
+        productService.deleteProduct(id);
+        return "redirect:/";
+    }
+
+    @GetMapping("/addPage")
+    public String redirectToAddProuctP() {
+        return "addPage";
+    }
+
+    @PostMapping("/addProduct")
+    public String addProduct(@ModelAttribute Product product) {
+        productService.addProduct(product);
+        return "redirect:/";
     }
 
     @Autowired
