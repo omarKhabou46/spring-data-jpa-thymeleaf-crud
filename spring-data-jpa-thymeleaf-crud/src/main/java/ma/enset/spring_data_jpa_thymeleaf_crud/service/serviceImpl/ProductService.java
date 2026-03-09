@@ -22,10 +22,10 @@ public class ProductService implements IProductService {
         return productRepository.save(product);
     }
 
-    @Override
+    /*@Override
     public Product updateProduct(Product product) {
         return productRepository.save(product);
-    }
+    }*/
 
     @Override
     public Product getProductById(long id) {
@@ -47,6 +47,12 @@ public class ProductService implements IProductService {
     public Page<Product> getAllProducts(int page, int size) {
         Page<Product> products = productRepository.findAll(PageRequest.of(page, size));
         return products;
+    }
+
+    @Override
+    public Page<Product> getAllProductsByName(String name,int page, int size) {
+        Page<Product> productPage = productRepository.findAllByNameContainingIgnoreCase(name, PageRequest.of(page, size));
+        return productPage;
     }
 
     @Autowired

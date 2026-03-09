@@ -16,8 +16,13 @@ public class ProductController {
     private IProductService productService;
 
     @GetMapping
-    public String fetchAllProducts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, Model model) {
-        Page<Product> productPage = productService.getAllProducts(page, size);
+    public String fetchAllProducts(@RequestParam(required = false) String name,@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, Model model) {
+        Page<Product> productPage = null;
+        if (name == null) {
+            productPage = productService.getAllProducts(page, size);
+        }else {
+            productPage = productService.getAllProductsByName(name ,page, size);
+        }
         model.addAttribute("productPage", productPage);
         return "index";
     }
@@ -38,7 +43,6 @@ public class ProductController {
     @PostMapping("/addProduct")
     public String addProduct(@Valid Product product, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) return "addPage";
-        System.out.println(product);
         productService.addProduct(product);
         return "redirect:/";
     }

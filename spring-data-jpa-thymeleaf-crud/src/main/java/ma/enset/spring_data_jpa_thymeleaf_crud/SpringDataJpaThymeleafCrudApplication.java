@@ -8,15 +8,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringDataJpaThymeleafCrudApplication implements CommandLineRunner {
+public class SpringDataJpaThymeleafCrudApplication {
 
-	private IProductService productService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringDataJpaThymeleafCrudApplication.class, args);
 	}
 
-	@Override
+	/* @Override
 	public void run(String... args) throws Exception {
 		Product product1 = Product.builder()
 				.name("Laptop")
@@ -31,9 +30,8 @@ public class SpringDataJpaThymeleafCrudApplication implements CommandLineRunner 
 				.build();
 		productService.addProduct(product2);
 	}
+	*/
 
-	@Autowired
-	public void setProductService(IProductService productService) {
-		this.productService = productService;
-	}
+
+
 }

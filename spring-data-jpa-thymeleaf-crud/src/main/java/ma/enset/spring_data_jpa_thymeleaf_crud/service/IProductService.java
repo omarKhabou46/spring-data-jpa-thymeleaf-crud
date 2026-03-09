@@ -5,8 +5,9 @@ import org.springframework.data.domain.Page;
 
 public interface IProductService {
     Product addProduct(Product product);
-    Product updateProduct(Product product);
+    // Product updateProduct(Product product);
     Product getProductById(long id);
     void deleteProduct(long id);
     Page<Product> getAllProducts(int page, int size);
+    Page<Product> getAllProductsByName(String name, int page, int size);
 }

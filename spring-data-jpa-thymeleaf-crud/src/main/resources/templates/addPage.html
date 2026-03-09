@@ -22,15 +22,14 @@
 
             <div class="mb-3">
                 <label for="name" class="form-label">Nom du produit</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Ex : T-shirt blanc" th:value="${product.name}" />
+                <input type="text" class="form-control" id="name" name="name" placeholder="t-shirt blanc" th:value="${product.name}" />
                 <div class="invalid-feedback">Veuillez entrer un nom.</div>
                 <span th:errors="${product.name}" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label for="price" class="form-label">Prix (€)</label>
+                <label for="price" class="form-label">Prix</label>
                 <div class="input-group">
-                    <span class="input-group-text">€</span>
                     <input type="number" class="form-control" id="price" name="price" placeholder="0.00" min="0" th:value="${product.price}"/>
                     <div class="invalid-feedback">Veuillez entrer un prix valide.</div>
                     <span th:errors="${product.price}" class="text-danger"></span>
