@@ -2,11 +2,13 @@ package enset.spring_data_jpa_thymeleaf_crud.controller;
 
 import enset.spring_data_jpa_thymeleaf_crud.entity.Product;
 import enset.spring_data_jpa_thymeleaf_crud.service.IProductService;
+import jakarta.validation.Valid;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -27,14 +29,25 @@ public class ProductController {
     }
 
     @GetMapping("/addPage")
-    public String redirectToAddProuctP() {
+    public String redirectToAddProuctP(Model model) {
+        Product product = new Product();
+        model.addAttribute("product", product);
         return "addPage";
     }
 
     @PostMapping("/addProduct")
-    public String addProduct(@ModelAttribute Product product) {
+    public String addProduct(@Valid Product product, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) return "addPage";
+        System.out.println(product);
         productService.addProduct(product);
         return "redirect:/";
+    }
+
+    @GetMapping("/update")
+    public String updateProduct(long id, Model model) {
+        Product product = productService.getProductById(id);
+        model.addAttribute("product", product);
+        return "addPage";
     }
 
     @Autowired

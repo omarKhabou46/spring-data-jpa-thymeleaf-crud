@@ -1,28 +1,58 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout1"
+>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.8/css/bootstrap.min.css">
+
 </head>
 <body>
-   <div class="d-flex justify-content-center">
-       <h3>Add Product Page</h3>
-       <form  action="/addProduct" th:method="post">
-         <div class="form-group">
-             <input type="text" name="name" placeholder="Laptop" class="form-control">
-         </div>
-           <div class="form-group">
-               <input type="text" name="price" placeholder="599.0" class="form-control">
-           </div>
+<div layout:fragment="content">
+<div class="d-flex align-items-center justify-content-center min-vh-100">
+<div class="card shadow-sm" style="max-width: 460px; width: 100%;" >
+    <div class="card-body p-4" >
 
-           <div class="form-group">
-               <input type="text" name="quantity" placeholder="10" class="form-control">
-           </div>
+        <h4 class="card-title mb-4">Ajouter un produit</h4>
 
-           <input type="submit" value="add Product">
+        <form id="productForm" action="addProduct" method="post">
 
-       </form>
-   </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Nom du produit</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Ex : T-shirt blanc" th:value="${product.name}" />
+                <div class="invalid-feedback">Veuillez entrer un nom.</div>
+                <span th:errors="${product.name}" class="text-danger"></span>
+            </div>
 
+            <div class="mb-3">
+                <label for="price" class="form-label">Prix (€)</label>
+                <div class="input-group">
+                    <span class="input-group-text">€</span>
+                    <input type="number" class="form-control" id="price" name="price" placeholder="0.00" min="0" th:value="${product.price}"/>
+                    <div class="invalid-feedback">Veuillez entrer un prix valide.</div>
+                    <span th:errors="${product.price}" class="text-danger"></span>
+
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="quantity" class="form-label">Quantité</label>
+                <input type="number" class="form-control" id="quantity"  name="quantity" placeholder="1" th:value="${product.quantity}"/>
+                <div class="invalid-feedback">Veuillez entrer une quantité.</div>
+                <span th:errors="${product.quantity}" class="text-danger"></span>
+            </div>
+
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-end">
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+</div>
+</div>
 </body>
 </html>
