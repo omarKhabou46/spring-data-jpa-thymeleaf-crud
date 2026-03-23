@@ -2,6 +2,7 @@ package enset.spring_data_jpa_thymeleaf_crud.controller;
 
 import enset.spring_data_jpa_thymeleaf_crud.entity.Product;
 import enset.spring_data_jpa_thymeleaf_crud.service.IProductService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,22 @@ public class ProductController {
     @Autowired
     public void setProductService(IProductService productService) {
         this.productService = productService;
+    }
+
+    @GetMapping("/notAuthorized")
+    public String getNotAuthorizedPage() {
+        return "notAuthorized";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return "login";
     }
 
 }
